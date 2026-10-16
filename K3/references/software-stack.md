@@ -49,11 +49,10 @@ The GitHub organization landing page maintains a dated K1/K3 upstream-status tab
 Custom ISA availability may depend on core placement. Capture and control affinity explicitly:
 
 ```bash
-taskset -pc $$
-taskset -c <cpu-list> ./your-binary
+taskset -pc $$  # observation only; it does not register an AI thread on K3
 ```
 
-Inside a test program, print `sched_getcpu()` after binding. On K1, map Linux CPU IDs to the AI-enabled cluster using the board's current device tree or vendor documentation. On K3, map execution to X100 versus A100 rather than relying on total CPU count.
+Inside a test program, the executing K3 AI thread must open `/proc/set_ai_thread`, write exactly one ASCII `0`, close it, then call `pthread_setaffinity_np`. Print and verify the singleton mask and `sched_getcpu()` after binding, plus VLEN1024 and RNE before custom instructions. An inherited `taskset` mask does not establish AI registration. On K1, map Linux CPU IDs to the AI-enabled cluster using the board's current device tree or vendor documentation. On K3, map execution to X100 versus A100 rather than relying on total CPU count.
 
 ## Build portability rules
 

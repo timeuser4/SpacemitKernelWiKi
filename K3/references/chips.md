@@ -52,6 +52,7 @@ The K3 uses a heterogeneous role split inside a vendor-described homogeneous RIS
 
 ### K3 implications for developers
 
+- Peak clarification checked on 2026-10-11: official K3 datasheet V1.9 (2026-09-24), section 2.1.2, and CPU manual section 8.2.2 both specify **60 TOPS at INT4 sparse**. Neither supplies a dense mixed i8/i4 with FP16 scaling or dense i8 compute peak. Mark such MFU denominators unavailable; do not infer them by dividing sparse TOPS. Direct source URLs and content hashes are in [sources.md](sources.md).
 - X100 and A100 are not interchangeable microarchitectures. Code generation, affinity, VLEN assumptions, cache/scratchpad usage, and performance counters must be tied to the executing core type.
 - A100 follows a standard CPU programming model but has a substantially wider vector length and IME support. That does not imply that arbitrary X100 binaries automatically exploit A100.
 - The K3 datasheet documents RISC-V PMUs on both X100 and A100, plus RISC-V N-Trace-compatible trace blocks. Tool availability still depends on board wiring, firmware, kernel, and image support.

@@ -17,7 +17,7 @@ def main() -> int:
     needles = [term.casefold() for term in args.terms]
     found = 0
 
-    for path in sorted((root / "references").glob("*.md")):
+    for path in sorted((root / "references").rglob("*.md")):
         lines = path.read_text(encoding="utf-8").splitlines()
         matching = [
             index

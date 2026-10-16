@@ -1,0 +1,4 @@
+interface:
+  display_name: "SpacemiT K3 Kernel Wiki"
+  short_description: "Sourced K1/K3 chip, board, and IME development guide"
+  default_prompt: "Use $spacemit-kernel-wiki-k3 to identify this SpacemiT platform and locate the correct chip, board, software, and IME documentation."
